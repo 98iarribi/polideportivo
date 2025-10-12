@@ -10,12 +10,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Polideportivo")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Polideportivo.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+110703e3b79c0941efe37f9b15d6e280c89bd480")]
-[assembly: System.Reflection.AssemblyProductAttribute("Polideportivo")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Polideportivo")]
+[assembly: System.Reflection.AssemblyProductAttribute("Polideportivo.Domain")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Polideportivo.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Generado por la clase WriteCodeFragment de MSBuild.

@@ -1,0 +1,12 @@
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\obj\Debug\net9.0\Polideportivo.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\obj\Debug\net9.0\Polideportivo.Domain.AssemblyInfoInputs.cache
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\obj\Debug\net9.0\Polideportivo.Domain.AssemblyInfo.cs
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\obj\Debug\net9.0\Polideportivo.Domain.csproj.CoreCompileInputs.cache
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\obj\Debug\net9.0\Polideportivo.Domain.sourcelink.json
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\bin\Debug\net9.0\Polideportivo.Domain.deps.json
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\bin\Debug\net9.0\Polideportivo.Domain.dll
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\bin\Debug\net9.0\Polideportivo.Domain.pdb
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\obj\Debug\net9.0\Polideportivo.Domain.dll
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\obj\Debug\net9.0\refint\Polideportivo.Domain.dll
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\obj\Debug\net9.0\Polideportivo.Domain.pdb
+C:\Users\TrendingPC\Desktop\Proyectos\polideportivo\Polideportivo.Domain\obj\Debug\net9.0\ref\Polideportivo.Domain.dll
