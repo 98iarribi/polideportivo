@@ -1,0 +1,107 @@
+@startuml
+
+allow_mixing
+
+package "API Layer" {
+    class BookingController {
+        +Book(User user, int courtNumber, DateTime slotTime)
+        +GetBookingHistory(User user)
+    }
+}
+
+package "Service / Scraper Layer" {
+    interface IBookingScraper {
+        +Task<bool> LoginAsync(User user)
+        +Task<BookingResult> BookSlotAsync(User user, int courtNumber, DateTime slotTime)
+    }
+
+    class BookingScraper {
+        ..implements IBookingScraper..
+    }
+
+    class BookingResult {
+        +bool Success
+        +string Message
+        +Booking? Booking
+    }
+
+    class ScraperLog {
+        +Guid LogId
+        +DateTime Timestamp
+        +string Message
+        +string? StackTrace
+    }
+}
+
+package "Domain Layer" {
+    class User {
+        +Guid UserId
+        +string Username
+        +string PasswordHash
+        +BookingHistory BookingHistory
+    }
+
+    class BookingHistory {
+        +Guid BookingHistoryId
+        +List<Booking> Bookings
+    }
+
+    class Booking {
+        +Guid BookingId
+        +Guid UserId
+        +int CourtNumber
+        +DateTime BookingDateTime
+        +BookingStatus Status
+    }
+
+    enum BookingStatus {
+        Pending
+        Confirmed
+        Failed
+    }
+
+    class FailedBookingAttempt {
+        +Guid AttemptId
+        +Guid UserId
+        +int CourtNumber
+        +DateTime SlotDateTime
+        +string ErrorMessage
+        +DateTime AttemptedAt
+    }
+
+    class PadelCourtTable {
+        +List<PadelCourt> Courts
+        +string GetIdForCourtAndTime(int courtNumber, TimeSpan time)
+        +List<string> GetIdsForTimes(List<TimeSpan> times)
+    }
+
+    class PadelCourt {
+        +int CourtNumber
+        +TimeSpan Duration
+        +Dictionary<TimeSpan,string> TimeSlotIds
+    }
+}
+
+package "Database Layer (SQL Server / Cloud DB)" {
+    ' Represent tables stored in the database
+    User -- BookingHistory
+    BookingHistory -- Booking
+    User -- FailedBookingAttempt
+}
+
+' Relationships
+BookingController --> IBookingScraper
+BookingScraper ..|> IBookingScraper
+PadelCourtTable "1" --> "*" PadelCourt
+
+
+' Logging Relationship
+BookingScraper --> ScraperLog : writes logs
+
+' External System
+rectangle "Third-Party Booking Website" as ThirdPartyWeb #LightBlue
+
+' Interaction
+BookingScraper --> ThirdPartyWeb : login / scrape / book
+
+@enduml
