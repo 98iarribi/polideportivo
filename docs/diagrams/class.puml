@@ -12,7 +12,7 @@ package "API Layer" {
 package "Service / Scraper Layer" {
     interface IBookingScraper {
         +Task<bool> LoginAsync(User user)
-        +Task<BookingResult> BookSlotAsync(User user, int courtNumber, DateTime slotTime)
+        +Task<BookingResult> BookAnyAvailableAsync(User user, BookingDate date, List<BookingTimeSlot> preferredSlots)
     }
 
     class BookingScraper {
