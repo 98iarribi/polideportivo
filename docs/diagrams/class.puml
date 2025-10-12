@@ -50,8 +50,21 @@ package "Domain Layer" {
         +Guid BookingId
         +Guid UserId
         +int CourtNumber
-        +DateTime BookingDateTime
+        +BookingDate BookingDate
         +BookingStatus Status
+    }
+
+    class BookingDate {
+        +DateOnly Date
+        +BookingTimeSlot TimeSlot
+    }
+
+    enum BookingTimeSlot {
+        T17_30
+        T18_30
+        T19_00
+        T19_30
+        T20_30
     }
 
     enum BookingStatus {
@@ -64,7 +77,7 @@ package "Domain Layer" {
         +Guid AttemptId
         +Guid UserId
         +int CourtNumber
-        +DateTime SlotDateTime
+        +BookingDate BookingDate
         +string ErrorMessage
         +DateTime AttemptedAt
     }
@@ -94,6 +107,10 @@ BookingController --> IBookingScraper
 BookingScraper ..|> IBookingScraper
 PadelCourtTable "1" --> "*" PadelCourt
 
+' Domain relationships
+Booking --> BookingDate
+BookingDate --> BookingTimeSlot
+FailedBookingAttempt --> BookingDate
 
 ' Logging Relationship
 BookingScraper --> ScraperLog : writes logs
