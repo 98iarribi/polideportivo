@@ -9,7 +9,7 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Polideportivo API is running!");
 
-// Login endpoint
+
 app.MapPost("/book", async (Polideportivo.LoginRequest request) =>
 {
     var browser = await StartBrowserAsync();
@@ -33,8 +33,6 @@ static async Task<IBrowser> StartBrowserAsync()
     {
         Headless = false // set true if you don’t want the browser UI
     });
-
-    // Perform any additional actions with the browser here
 
     return browser;
 }
