@@ -1,41 +1,42 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Playwright;
+using Polideportivo;
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.MapGet("/", () => "Polideportivo API is running!");
+
+// Login endpoint
+app.MapPost("/book", async (Polideportivo.LoginRequest request) =>
 {
-    app.MapOpenApi();
+    var browser = await StartBrowserAsync();
+
+    var loginPage = new LoginPage();
+    var success = await loginPage.LoginAsync(browser, request.Username, request.Password);
+
+    // Go to booking page and try to book
+
+    await browser.CloseAsync();
+
+    return success ? Results.Ok("Login successful") : Results.BadRequest("Login failed");
+});
+
+
+
+static async Task<IBrowser> StartBrowserAsync()
+{
+    var playwright = await Playwright.CreateAsync();
+    var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
+    {
+        Headless = false // set true if you don’t want the browser UI
+    });
+
+    // Perform any additional actions with the browser here
+
+    return browser;
 }
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
