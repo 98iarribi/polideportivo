@@ -1,2 +1,32 @@
-.*obj
-.*bin
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# ASP.NET Core files
+*.db
+*.pdb
+*.log
+*.vs/
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Publish folder
+publish/
+
+# Playwright storage & artifacts (optional)
+*.ms-playwright
