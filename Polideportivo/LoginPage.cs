@@ -4,17 +4,17 @@ using System.Threading.Tasks;
 
 namespace Polideportivo;
 
-public class LoginPage
+public class LoginPageScraper
 {
     private readonly string _url = "https://deportes.zizurmayor.es:8443/zonaabo.php";
 
-    public async Task<bool> LoginAsync(IBrowser browser, string username, string password)
+    public async Task<bool> LoginAsync(IBrowser browser, LoginRequest request)
     {
         var page = await browser.NewPageAsync();
         await page.GotoAsync(_url, new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded });
 
-        await page.FillAsync("#usuario", username);
-        await page.FillAsync("#password", password);
+        await page.FillAsync("#usuario", request.Username);
+        await page.FillAsync("#password", request.Password);
         await page.ClickAsync("#validar");
 
         // Wait until  succeeded.

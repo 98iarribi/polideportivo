@@ -10,16 +10,22 @@ var app = builder.Build();
 app.MapGet("/", () => "Polideportivo API is running!");
 
 
-app.MapPost("/book", async (Polideportivo.LoginRequest request) =>
+app.MapGet("/book", async () =>
 {
     var browser = await StartBrowserAsync();
 
-    var loginPage = new LoginPage();
-    var success = await loginPage.LoginAsync(browser, request.Username, request.Password);
+    var loginPage = new LoginPageScraper();
+    var success = await loginPage.LoginAsync(
+        browser,
+        new Polideportivo.LoginRequest { Username = "placeholder", Password = "placeholder" }
+    );
 
-    // Go to booking page and try to book
 
-    await browser.CloseAsync();
+    var padelCourtsPage = new PadelCourtPageScraper();
+    success = await padelCourtsPage.GoToDate(browser);
+
+
+    //await browser.CloseAsync();
 
     return success ? Results.Ok("Login successful") : Results.BadRequest("Login failed");
 });
